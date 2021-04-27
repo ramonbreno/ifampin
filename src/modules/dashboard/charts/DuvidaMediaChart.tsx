@@ -1,15 +1,13 @@
-import React, { FC, useState, useEffect } from 'react';
-import {
-    XAxis, YAxis, CartesianGrid, Tooltip, Legend, ScatterChart, ZAxis, Scatter,
-} from 'recharts';
-import Title from '../../../Title';
+import React, { useEffect, useState } from 'react';
+import { CartesianGrid, Legend, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import DadosGeraisData from '../../../contracts/modules/charts/dados_gerais.json';
+import Title from '../../../Title';
 
 const DuvidaMediaChart: React.FC<any> = ({ title }) => {
-    const [grupo1, setGrupo1] = useState<Array<Object>>([]);
-    const [grupo2, setGrupo2] = useState<Array<Object>>([]);
-    const [grupo3, setGrupo3] = useState<Array<Object>>([]);
-    const [grupo4, setGrupo4] = useState<Array<Object>>([]);
+    const [grupo1/* , setGrupo1 */] = useState<Array<Object>>([]);
+    const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
+    const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
+    const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
 
     useEffect(() => {
 
@@ -60,11 +58,11 @@ const DuvidaMediaChart: React.FC<any> = ({ title }) => {
         });
 
 
-        setGrupo1(grupo1);
+        /* setGrupo1(grupo1);
         setGrupo2(grupo2);
         setGrupo3(grupo3);
-        setGrupo4(grupo4);
-    }, []);
+        setGrupo4(grupo4); */
+    }, [grupo1, grupo2, grupo3, grupo4]);
 
     return (
         <React.Fragment>

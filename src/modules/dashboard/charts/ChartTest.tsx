@@ -1,81 +1,14 @@
-import React, { FC, useState, useEffect } from 'react';
-import {
-    XAxis, YAxis, CartesianGrid, Tooltip, Legend, ScatterChart, ZAxis, Scatter,
-} from 'recharts';
-import Title from '../../../Title';
-import ResponseTimeData from '../../../contracts/modules/charts/tempo_resposta.json';
+import React, { useEffect, useState } from 'react';
+import { CartesianGrid, Legend, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import Compreensao from '../../../contracts/modules/charts/compreensao_questao.json';
-
-const data01 = [
-    {
-        "x": 100,
-        "y": 200,
-        "z": 200
-    },
-    {
-        "x": 120,
-        "y": 100,
-        "z": 260
-    },
-    {
-        "x": 170,
-        "y": 300,
-        "z": 400
-    },
-    {
-        "x": 140,
-        "y": 250,
-        "z": 280
-    },
-    {
-        "x": 150,
-        "y": 400,
-        "z": 500
-    },
-    {
-        "x": 110,
-        "y": 280,
-        "z": 200
-    }
-];
-const data02 = [
-    {
-        "x": 200,
-        "y": 260,
-        "z": 240
-    },
-    {
-        "x": 240,
-        "y": 290,
-        "z": 220
-    },
-    {
-        "x": 190,
-        "y": 290,
-        "z": 250
-    },
-    {
-        "x": 198,
-        "y": 250,
-        "z": 210
-    },
-    {
-        "x": 180,
-        "y": 280,
-        "z": 260
-    },
-    {
-        "x": 210,
-        "y": 220,
-        "z": 230
-    }
-];
+import ResponseTimeData from '../../../contracts/modules/charts/tempo_resposta.json';
+import Title from '../../../Title';
 
 const ChartTest: React.FC<any> = ({ title }) => {
-    const [grupo1, setGrupo1] = useState<Array<Object>>([]);
-    const [grupo2, setGrupo2] = useState<Array<Object>>([]);
-    const [grupo3, setGrupo3] = useState<Array<Object>>([]);
-    const [grupo4, setGrupo4] = useState<Array<Object>>([]);
+    const [grupo1] = useState<Array<Object>>([]);
+    const [grupo2] = useState<Array<Object>>([]);
+    const [grupo3] = useState<Array<Object>>([]);
+    const [grupo4] = useState<Array<Object>>([]);
 
     useEffect(() => {
 
@@ -107,7 +40,7 @@ const ChartTest: React.FC<any> = ({ title }) => {
                 if (contQuestions === 0)//rever lógica para esse IF
                     currentStudant = item.id_estudante;
 
-                if (item.id_estudante != currentStudant /* && somaComp > 0 */) {
+                if (item.id_estudante !== currentStudant /* && somaComp > 0 */) {
                     mediaComp = somaComp / contQuestions;
                     contQuestions = 0
                     somaComp = 0
@@ -134,7 +67,7 @@ const ChartTest: React.FC<any> = ({ title }) => {
                 if (contQuestions === 0)//rever lógica para esse IF
                     currentStudant = item.id_estudante;
 
-                if (item.id_estudante != currentStudant /* && somaTempo > 0 */) {
+                if (item.id_estudante !== currentStudant /* && somaTempo > 0 */) {
 
                     mediaTempo = somaTempo / contQuestions;
                     contQuestions = 0
@@ -205,11 +138,11 @@ const ChartTest: React.FC<any> = ({ title }) => {
 
 
 
-        setGrupo1(grupo1);
+        /* setGrupo1(grupo1);
         setGrupo2(grupo2);
         setGrupo3(grupo3);
-        setGrupo4(grupo4);
-    }, []);
+        setGrupo4(grupo4); */
+    }, [grupo1, grupo2, grupo3, grupo4]);
 
     return (
         <React.Fragment>
