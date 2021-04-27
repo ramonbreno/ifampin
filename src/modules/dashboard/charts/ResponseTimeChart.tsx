@@ -10,7 +10,7 @@ const ResponseTimeChart: React.FC<any> = ({ title }) => {
         let obj = {},
             obj2 = {},
             dadosAux = [];
-
+        //
         ResponseTimeData.map((item) => {
             if (item.id_simulado === 1 && item.id_estudante === '2018139340118') {
                 const othersFields = {
