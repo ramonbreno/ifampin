@@ -1,9 +1,8 @@
-import React from 'react';
-import Dashboard from './Dashboard';
 import {
-  ThemeProvider,
-  createMuiTheme,
+  createMuiTheme, ThemeProvider
 } from '@material-ui/core/styles';
+import React from 'react';
+import Routers from './router/Index';
 
 const theme = createMuiTheme({
   palette: {
@@ -24,7 +23,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Routers />
     </ThemeProvider>
   );
 }
