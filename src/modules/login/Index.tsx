@@ -46,7 +46,6 @@ const Login = () => {
     const attempt = () => {
         if (values.registration.length === 0 && values.password.length === 0) {
 
-            console.log('entrou aqui');
             setAlert({
                 message: 'Os campos devem ser preenchidos',
                 hasAlert: true
