@@ -4,6 +4,7 @@ import DadosGeraisData from '../../../contracts/modules/charts/dados_gerais.json
 import Title from '../../../Title';
 
 const DuvidaTempoChart: React.FC<any> = ({ title }) => {
+    const [grupo0/* , setGrupo0 */] = useState<Array<Object>>([]);
     const [grupo1/* , setGrupo1 */] = useState<Array<Object>>([]);
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
@@ -13,8 +14,9 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
 
         let kmensList: Array<Array<number>> = [],
             maiorX = 0,
-            maiorY = 0
-            ;
+            maiorY = 0,
+            registrationLocal = window.localStorage.getItem('registration');
+        ;
 
         DadosGeraisData.forEach(item => {
             let duvida = parseFloat(item.duvida.toFixed(2));
@@ -28,6 +30,7 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
             let kmensItem = [];
             kmensItem.push(duvida);
             kmensItem.push(tempo);
+            kmensItem.push(item.id_estudante);
             kmensList.push(kmensItem);
 
         });
@@ -35,14 +38,20 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
         kmensList.forEach(item => {
             let dadosItem = {};
             const duvida = item[0],
-                tempo = item[1];
+                tempo = item[1],
+                registration = item[2]
+                ;
 
             dadosItem = {
                 "x": duvida,
                 "y": tempo
             };
 
-            if (duvida >= 0 && duvida <= maiorX / 2 &&
+            if (registrationLocal != null && parseInt(registrationLocal) === registration) {
+                console.log(registration);
+                grupo0.push(dadosItem);
+            }
+            else if (duvida >= 0 && duvida <= maiorX / 2 &&
                 tempo >= 0 && tempo <= maiorY / 2) {
                 grupo1.push(dadosItem);
             } else if (duvida >= 0 && duvida <= maiorX / 2 &&
@@ -62,13 +71,17 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
         setGrupo2(grupo2);
         setGrupo3(grupo3);
         setGrupo4(grupo4); */
-    }, [grupo1, grupo2, grupo3, grupo4]);
+    }, [grupo0, grupo1, grupo2, grupo3, grupo4]);
 
     return (
         <React.Fragment>
             <Title title={title} />
             <ScatterChart width={730} height={250}
-                margin={{ top: 20, right: 20, bottom: 10, left: 10 }}>
+                /* margin={{ top: 20, right: 20, bottom: 10, left: 10 }} */
+                style={{
+                    margin: '10px auto'
+                }}
+            >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" dataKey="x" name="duvida" unit="d" />
                 <YAxis type="number" dataKey="y" name="tempo" unit="s" />
@@ -80,6 +93,7 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
                 <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
+                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
         </React.Fragment>
     );

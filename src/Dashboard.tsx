@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -16,14 +18,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import React from 'react';
 import { mainListItems } from './listItems';
 import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart';
 import Chart from './modules/dashboard/charts/Chart';
-import ChartTest from './modules/dashboard/charts/ChartTest';
+/* import ChartTest from './modules/dashboard/charts/ChartTest'; */
 import CompreensaoAssertividadeChart from './modules/dashboard/charts/CompreensaoAssertividadeChart';
 import CompreensaoMediaChart from './modules/dashboard/charts/CompreensaoMediaChart';
-import ComprehensionChart from './modules/dashboard/charts/ComprehensionChart.';
+/* import ComprehensionChart from './modules/dashboard/charts/ComprehensionChart.'; */
 import DesordemAssertividadeChart from './modules/dashboard/charts/DesordemAssertividadeChart';
 import DesordemDuvidaChart from './modules/dashboard/charts/DesordemDuvidaChart';
 import DesordemMediaChart from './modules/dashboard/charts/DesordemMediaChart';
@@ -33,6 +34,7 @@ import DuvidaMediaChart from './modules/dashboard/charts/DuvidaMediaChart';
 import DuvidaTempoChart from './modules/dashboard/charts/DuvidaTempoChart';
 import ResponseTimeChart from './modules/dashboard/charts/ResponseTimeChart';
 import TempoMediaChart from './modules/dashboard/charts/TempoMediaChart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Copyright() {
     return (
@@ -130,7 +132,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const history = useHistory();
+    const [open, setOpen] = useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -139,6 +142,10 @@ const Dashboard = () => {
     };
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+    const logout = () => {
+        window.localStorage.setItem('registration', '');
+        history.push('/login');
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -156,11 +163,13 @@ const Dashboard = () => {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
                     </Typography>
+                    <IconButton color="inherit" onClick={logout} >
+                        <ExitToAppIcon />
+                    </IconButton>
                     <IconButton color="inherit">
                         {/* <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
                         </Badge> */}
-
                         <AccountCircleIcon />
                     </IconButton>
                 </Toolbar>
@@ -197,20 +206,20 @@ const Dashboard = () => {
                                 <ResponseTimeChart title={'Tempo de resposta'} />
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
+                        {/* <Grid item xs={12} md={12} lg={12}>
                             <Paper className={fixedHeightPaper}>
                                 <ComprehensionChart title={'Agrupamento'} />
                             </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
+                        </Grid> */}
+                        {/* <Grid item xs={12} md={12} lg={12}>
                             <Paper className={fixedHeightPaper}>
                                 <ChartTest title={'Gráfico'} />
                             </Paper>
-                        </Grid>
+                        </Grid> */}
 
                         <Grid item xs={12} md={12} lg={12}>
                             <Paper className={fixedHeightPaper}>
-                                <AssertividadeChart title={'Assertividade'} />
+                                <AssertividadeChart title={'Tempo x Assertividade'} />
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={12}>

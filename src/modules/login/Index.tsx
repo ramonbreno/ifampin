@@ -36,18 +36,26 @@ const Login = () => {
 
     const onSubmit = (event: any) => {
         event.preventDefault();
-        //console.log(attempt(values));
+
         if (attempt()) {
+            window.localStorage.setItem('registration', values.registration);
             return history.push('/dashboard');
         }
 
     }
 
     const attempt = () => {
-        if (values.registration.length === 0 && values.password.length === 0) {
+        if (values.registration.length === 0) {
 
             setAlert({
-                message: 'Os campos devem ser preenchidos',
+                message: 'O campo matrícula é obrigatório',
+                hasAlert: true
+            });
+
+            return false;
+        } else if (values.password.length === 0) {
+            setAlert({
+                message: 'O campo senha é obrigatório',
                 hasAlert: true
             });
 
@@ -94,14 +102,13 @@ const Login = () => {
                             margin="normal"
                             required
                             fullWidth
-                            //disabled={firstAccess}
                             id="standard-basic"
                             label="Matrícula"
                             name={"registration"}
                             autoFocus
                             onChange={onChange}
-                            //value={values.registration}
-                            type={"text"}
+                            type={"number"}
+
                         />
                         <TextField
                             variant="outlined"
