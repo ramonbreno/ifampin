@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
+/* import Box from '@material-ui/core/Box'; */
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
+/* import Link from '@material-ui/core/Link'; */
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,8 +18,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
-import { mainListItems } from './listItems';
-import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart';
+import { chartListItems } from './listItems';
+/* import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart'; */
 import Chart from './modules/dashboard/charts/Chart';
 /* import ChartTest from './modules/dashboard/charts/ChartTest'; */
 import CompreensaoAssertividadeChart from './modules/dashboard/charts/CompreensaoAssertividadeChart';
@@ -35,8 +35,10 @@ import DuvidaTempoChart from './modules/dashboard/charts/DuvidaTempoChart';
 import ResponseTimeChart from './modules/dashboard/charts/ResponseTimeChart';
 import TempoMediaChart from './modules/dashboard/charts/TempoMediaChart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+/* import Orders from './Orders';
+import Deposits from './Deposits'; */
 
-function Copyright() {
+/* function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
@@ -47,9 +49,9 @@ function Copyright() {
             {'.'}
         </Typography>
     );
-}
+} */
 
-const drawerWidth = 240;
+const drawerWidth = 300;//default 240
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -146,6 +148,65 @@ const Dashboard = () => {
         window.localStorage.setItem('registration', '');
         history.push('/login');
     }
+    const chartElement = (children: React.ReactNode) =>
+        <Container maxWidth="lg" className={classes.container}>
+            <Grid item xs={12} md={12} lg={12}>
+                <Paper className={fixedHeightPaper}>
+                    {children}
+                </Paper>
+            </Grid>
+        </Container>;
+    const routes = [
+        {
+            path: '/dashboard',
+            main: () => chartElement(<Chart title={'Nível de Confusão'} />),
+        },
+        {
+            path: '/tempo-resposta',
+            main: () => chartElement(<ResponseTimeChart title={'Tempo de resposta'} />),
+        },
+        {
+            path: '/Desordem x Assertividade',
+            main: () => chartElement(<DesordemAssertividadeChart title={'Desordem x Assertividade'} />),
+        },
+        {
+            path: '/duvida-assertividade',
+            main: () => chartElement(<DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />),
+        },
+        {
+            path: '/compreensao-assertividade',
+            main: () => chartElement(<CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />),
+        },
+        {
+            path: '/desordem-tempo',
+            main: () => chartElement(<DesordemTempoChart title={'Desordem x Tempo'} />),
+        },
+        {
+            path: '/desordem-duvida',
+            main: () => chartElement(<DesordemDuvidaChart title={'Desordem x Dúvida'} />),
+        },
+        {
+            path: '/duvida-tempo',
+            main: () => chartElement(<DuvidaTempoChart title={'Dúvida x Tempo'} />),
+        },
+        {
+            path: '/compreensao-media',
+            main: () => chartElement(<CompreensaoMediaChart title={'Compreensão x Média Simulado'} />),
+        },
+        {
+            path: '/duvida-media',
+            main: () => chartElement(<DuvidaMediaChart title={'Dúvida x Média Simulado'} />),
+        },
+        {
+            path: '/desordem-media',
+            main: () => chartElement(<DesordemMediaChart title={'Desordem x Média Simulado'} />),
+        },
+        {
+            path: '/tempo-media',
+            main: () => chartElement(<TempoMediaChart title={'Tempo x Média Simulado'} />),
+        },
+    ];
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -174,123 +235,40 @@ const Dashboard = () => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <Drawer
-                variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>{mainListItems}</List>
-                {/* <Divider />
-                <List>{secondaryListItems}</List> */}
-            </Drawer>
-            <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
-                        {/* Chart */}
-                        {<Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <Chart title={'Nível de Confusão'} />
-                            </Paper>
-                        </Grid>}
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <ResponseTimeChart title={'Tempo de resposta'} />
-                            </Paper>
-                        </Grid>
-                        {/* <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <ComprehensionChart title={'Agrupamento'} />
-                            </Paper>
-                        </Grid> */}
-                        {/* <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <ChartTest title={'Gráfico'} />
-                            </Paper>
-                        </Grid> */}
+            <Router>
+                <Drawer
+                    variant="permanent"
+                    classes={{
+                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                    }}
+                    open={open}
+                >
+                    <div className={classes.toolbarIcon}>
+                        <IconButton onClick={handleDrawerClose}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    {/* <Divider />
+                    <List>{mainListItems}</List> */}
+                    <Divider />
+                    <List>{chartListItems}</List>
 
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <AssertividadeChart title={'Tempo x Assertividade'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DesordemAssertividadeChart title={'Desordem x Assertividade'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DesordemTempoChart title={'Desordem x Tempo'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DesordemDuvidaChart title={'Desordem x Dúvida'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DuvidaTempoChart title={'Dúvida x Tempo'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <CompreensaoMediaChart title={'Compreensão x Média Simulado'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DuvidaMediaChart title={'Dúvida x Média Simulado'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <DesordemMediaChart title={'Desordem x Média Simulado'} />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={12} lg={12}>
-                            <Paper className={fixedHeightPaper}>
-                                <TempoMediaChart title={'Tempo x Média Simulado'} />
-                            </Paper>
-                        </Grid>
-
-                        {/* Recent Deposits */}
-                        {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid> */}
-                        {/* Recent Orders */}
-                        {/* <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <Orders />
-                            </Paper>
-                        </Grid> */}
-                    </Grid>
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
-                </Container>
-            </main>
+                </Drawer>
+                <main className={classes.content}>
+                    <div className={classes.appBarSpacer} />
+                    <Switch>
+                        {
+                            routes.map((route, index) => (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    children={<route.main />}
+                                />
+                            ))
+                        }
+                    </Switch>
+                </main>
+            </Router>
         </div>
     );
 }
