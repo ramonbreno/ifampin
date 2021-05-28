@@ -19,8 +19,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { chartListItems } from './listItems';
-/* import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart'; */
-import Chart from './modules/dashboard/charts/Chart';
+import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart';
+import ConfusionLevelChart from './modules/dashboard/charts/ConfusionLevelChart';
 /* import ChartTest from './modules/dashboard/charts/ChartTest'; */
 import CompreensaoAssertividadeChart from './modules/dashboard/charts/CompreensaoAssertividadeChart';
 import CompreensaoMediaChart from './modules/dashboard/charts/CompreensaoMediaChart';
@@ -148,62 +148,67 @@ const Dashboard = () => {
         window.localStorage.setItem('registration', '');
         history.push('/login');
     }
-    const chartElement = (children: React.ReactNode) =>
+    const chartElement = (children: React.ReactNode, subtitle: string) =>
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
                     {children}
+                    <span style={{ color: '#d6913c' }}>{subtitle}</span>
                 </Paper>
             </Grid>
         </Container>;
     const routes = [
         {
             path: '/dashboard',
-            main: () => chartElement(<Chart title={'Nível de Confusão'} />),
+            main: () => chartElement(<AssertividadeChart title={'Assertividade'} />, ''),
+        },
+        {
+            path: '/nivel-confusao',
+            main: () => chartElement(<ConfusionLevelChart title={'Nível de Confusão'} />, ''),
         },
         {
             path: '/tempo-resposta',
-            main: () => chartElement(<ResponseTimeChart title={'Tempo de resposta'} />),
+            main: () => chartElement(<ResponseTimeChart title={'Tempo de resposta'} />, ''),
         },
         {
             path: '/Desordem x Assertividade',
-            main: () => chartElement(<DesordemAssertividadeChart title={'Desordem x Assertividade'} />),
+            main: () => chartElement(<DesordemAssertividadeChart title={'Desordem x Assertividade'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/duvida-assertividade',
-            main: () => chartElement(<DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />),
+            main: () => chartElement(<DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/compreensao-assertividade',
-            main: () => chartElement(<CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />),
+            main: () => chartElement(<CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/desordem-tempo',
-            main: () => chartElement(<DesordemTempoChart title={'Desordem x Tempo'} />),
+            main: () => chartElement(<DesordemTempoChart title={'Desordem x Tempo'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/desordem-duvida',
-            main: () => chartElement(<DesordemDuvidaChart title={'Desordem x Dúvida'} />),
+            main: () => chartElement(<DesordemDuvidaChart title={'Desordem x Dúvida'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/duvida-tempo',
-            main: () => chartElement(<DuvidaTempoChart title={'Dúvida x Tempo'} />),
+            main: () => chartElement(<DuvidaTempoChart title={'Dúvida x Tempo'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/compreensao-media',
-            main: () => chartElement(<CompreensaoMediaChart title={'Compreensão x Média Simulado'} />),
+            main: () => chartElement(<CompreensaoMediaChart title={'Compreensão x Média Simulado'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/duvida-media',
-            main: () => chartElement(<DuvidaMediaChart title={'Dúvida x Média Simulado'} />),
+            main: () => chartElement(<DuvidaMediaChart title={'Dúvida x Média Simulado'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/desordem-media',
-            main: () => chartElement(<DesordemMediaChart title={'Desordem x Média Simulado'} />),
+            main: () => chartElement(<DesordemMediaChart title={'Desordem x Média Simulado'} />, '*O ponto amarelo é você'),
         },
         {
             path: '/tempo-media',
-            main: () => chartElement(<TempoMediaChart title={'Tempo x Média Simulado'} />),
+            main: () => chartElement(<TempoMediaChart title={'Tempo x Média Simulado'} />, '*O ponto amarelo é você'),
         },
     ];
 

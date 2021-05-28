@@ -14,7 +14,7 @@ const ResponseTimeChart: React.FC<any> = ({ title }) => {
         ResponseTimeData.map((item) => {
             if (item.id_simulado === 1 && item.id_estudante === '2018139340118') {
                 const othersFields = {
-                    "name": `Aluno ${item.id_estudante}`,
+                    "name": '',//`Aluno ${item.id_estudante}`
                     [`Q${item.questao}`]: item.tempo,
                     dataKey: `Q${item.questao}`
                 };
@@ -25,7 +25,7 @@ const ResponseTimeChart: React.FC<any> = ({ title }) => {
             }
             if (item.id_simulado === 1 && item.id_estudante === '2018139340207') {
                 const othersFields = {
-                    "name": `Aluno ${item.id_estudante}`,
+                    "name": '',//`Aluno ${item.id_estudante}`
                     [`Q${item.questao}`]: item.tempo,
                     dataKey: `Q${item.questao}`
                 };

@@ -91,6 +91,10 @@ const linkRoute = (route: any, text: String) =>
 const routes = [
     {
         path: '/dashboard',
+        title: 'Assertividade'
+    },
+    {
+        path: '/nivel-confusao',
         title: 'Nível de Confusão'
     },
     {

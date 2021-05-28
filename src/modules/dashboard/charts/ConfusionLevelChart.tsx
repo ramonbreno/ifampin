@@ -23,7 +23,7 @@ const data = [
     },
 ];
 
-const Chart: React.FC<any> = ({ title }) => {
+const ConfusionLevelChart: React.FC<any> = ({ title }) => {
 
     return (
         <React.Fragment>
@@ -54,4 +54,4 @@ const Chart: React.FC<any> = ({ title }) => {
     );
 }
 
-export default Chart;
+export default ConfusionLevelChart;
