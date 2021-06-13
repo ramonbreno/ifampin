@@ -9,6 +9,7 @@ const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -51,21 +52,25 @@ const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
                 console.log(registration);
                 grupo0.push(dadosItem);
             }
-            else if (desordem >= 0 && desordem <= maiorDesordem / 2 &&
-                assertividade >= 0 && assertividade <= maiorAssert / 2) {
+            if (desordem >= 0 && desordem <= maiorDesordem / 2 &&
+                assertividade >= 0 && assertividade <= maiorAssert / 2) {//baia assertividade e baixa desordem - grupo 1 
                 grupo1.push(dadosItem);
+                setRecommendation('O aluno não teve um índice de assertividade boa, mas o aluno seguiu a ordem de questões propostas pelo professor')
             } else if (desordem >= 0 && desordem <= maiorDesordem / 2 &&
-                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
+                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {//alta acertividade e baia desordem - grpo 3
                 grupo2.push(dadosItem);
+                setRecommendation('O aluno demonstrou conhecimento das questões na ordem apresentada pelo professor no simulado');
             } else if (desordem > maiorDesordem / 2 && desordem <= maiorDesordem &&
-                assertividade >= 0 && assertividade <= maiorAssert / 2) {
+                assertividade >= 0 && assertividade <= maiorAssert / 2) {//baixa asseitivdade e alta desordem - grupo 2
                 grupo3.push(dadosItem);
+                setRecommendation('O aluno estava inseguro com as respostas, é necessário rever o conteúdo para responder com mais segurança');
             } else if (desordem > maiorDesordem / 2 && desordem <= maiorDesordem &&
-                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
+                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {//alta assertividade e alta desordem - grupo 4
                 grupo4.push(dadosItem);
+                setRecommendation('O aluno demonstrou conhecimento do conteúdo, porém respondeu as questões na ordem que sentiu mais confiança em responder');
             }
-        });
 
+        });
 
         /* setGrupo1(grupo1);
         setGrupo2(grupo2);
@@ -95,6 +100,7 @@ const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

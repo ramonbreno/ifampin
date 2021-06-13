@@ -9,6 +9,7 @@ const DuvidaAssertividadeChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -51,18 +52,22 @@ const DuvidaAssertividadeChart: React.FC<any> = ({ title }) => {
                 console.log(registration);
                 grupo0.push(dadosItem);
             }
-            else if (duvida >= 0 && duvida <= maiorDuvida / 2 &&
+            if (duvida >= 0 && duvida <= maiorDuvida / 2 &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo1.push(dadosItem);
+                setRecommendation('O aluno não teve um índice de assertividade boa, porém o aluno estava o nível de dúvidas, pode ser que o aluno não estava levando o simulado a sério, marcando sem ter atenção as questões');
             } else if (duvida >= 0 && duvida <= maiorDuvida / 2 &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo2.push(dadosItem);
+                setRecommendation('O aluno apresentava poucas dúvidas em relação as questões e possuiu um nível aceitável de assertividade, parecendo que estava seguro durante o simulado.')
             } else if (duvida > maiorDuvida / 2 && duvida <= maiorDuvida &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo3.push(dadosItem);
+                setRecommendation('O aluno demonstrou insegurança ao responder as questões com alto nível de dúvida e uma baixa assertividade, o que se leva a crer que o aluno ainda se esforçou, porém não tinha a confiança ou o conhecimento necessário no simulado.')
             } else if (duvida > maiorDuvida / 2 && duvida <= maiorDuvida &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo4.push(dadosItem);
+                setRecommendation('O aluno demonstrou conhecimento do conteúdo, porém respondeu as questões com alguma dúvida, necessário que se sinta mais seguro ao responder as questões.')
             }
         });
 
@@ -94,6 +99,7 @@ const DuvidaAssertividadeChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }
