@@ -93,14 +93,14 @@ const routes = [
         path: '/dashboard',
         title: 'Assertividade'
     },
-    {
+    /* {
         path: '/nivel-confusao',
         title: 'Nível de Confusão'
     },
     {
         path: '/tempo-resposta',
         title: 'Tempo de resposta'
-    },
+    }, */
     {
         path: '/Desordem x Assertividade',
         title: 'Desordem x Assertividade'

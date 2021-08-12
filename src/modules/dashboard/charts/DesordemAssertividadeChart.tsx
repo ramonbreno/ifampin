@@ -53,21 +53,25 @@ const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
                 grupo0.push(dadosItem);
             }
             if (desordem >= 0 && desordem <= maiorDesordem / 2 &&
-                assertividade >= 0 && assertividade <= maiorAssert / 2) {//baia assertividade e baixa desordem - grupo 1 
+                assertividade >= 0 && assertividade <= maiorAssert / 2) {//baixa assertividade e baixa desordem - grupo 1 
                 grupo1.push(dadosItem);
-                setRecommendation('O aluno não teve um índice de assertividade boa, mas o aluno seguiu a ordem de questões propostas pelo professor')
+                //setRecommendation('O aluno não teve um índice de assertividade boa, mas o aluno seguiu a ordem de questões propostas pelo professor')
+                setRecommendation('você precisa estudar um pouco mais, você consegue')
             } else if (desordem >= 0 && desordem <= maiorDesordem / 2 &&
-                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {//alta acertividade e baia desordem - grpo 3
+                assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {//alta assertividade e baixa desordem - grpo 3
                 grupo2.push(dadosItem);
-                setRecommendation('O aluno demonstrou conhecimento das questões na ordem apresentada pelo professor no simulado');
+                //setRecommendation('O aluno demonstrou conhecimento das questões na ordem apresentada pelo professor no simulado');
+                setRecommendation('Continue assim, você está no caminho certo');
             } else if (desordem > maiorDesordem / 2 && desordem <= maiorDesordem &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {//baixa asseitivdade e alta desordem - grupo 2
                 grupo3.push(dadosItem);
-                setRecommendation('O aluno estava inseguro com as respostas, é necessário rever o conteúdo para responder com mais segurança');
+                //setRecommendation('O aluno estava inseguro com as respostas, é necessário rever o conteúdo para responder com mais segurança');
+                setRecommendation('Você precisa estudar mais, assim conseguirá melhorar, e também se concentrar mais na hora de responder as questões');
             } else if (desordem > maiorDesordem / 2 && desordem <= maiorDesordem &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {//alta assertividade e alta desordem - grupo 4
                 grupo4.push(dadosItem);
-                setRecommendation('O aluno demonstrou conhecimento do conteúdo, porém respondeu as questões na ordem que sentiu mais confiança em responder');
+                //setRecommendation('O aluno demonstrou conhecimento do conteúdo, porém respondeu as questões na ordem que sentiu mais confiança em responder');
+                setRecommendation('Tente se concentrar melhor na hora de responder as questões');
             }
 
         });

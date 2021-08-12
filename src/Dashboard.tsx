@@ -20,7 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import { chartListItems } from './listItems';
 import AssertividadeChart from './modules/dashboard/charts/AssertividadeChart';
-import ConfusionLevelChart from './modules/dashboard/charts/ConfusionLevelChart';
+//import ConfusionLevelChart from './modules/dashboard/charts/ConfusionLevelChart';
 /* import ChartTest from './modules/dashboard/charts/ChartTest'; */
 import CompreensaoAssertividadeChart from './modules/dashboard/charts/CompreensaoAssertividadeChart';
 import CompreensaoMediaChart from './modules/dashboard/charts/CompreensaoMediaChart';
@@ -32,7 +32,7 @@ import DesordemTempoChart from './modules/dashboard/charts/DesordemTempoChart';
 import DuvidaAssertividadeChart from './modules/dashboard/charts/DuvidaAssertividadeChart';
 import DuvidaMediaChart from './modules/dashboard/charts/DuvidaMediaChart';
 import DuvidaTempoChart from './modules/dashboard/charts/DuvidaTempoChart';
-import ResponseTimeChart from './modules/dashboard/charts/ResponseTimeChart';
+//import ResponseTimeChart from './modules/dashboard/charts/ResponseTimeChart';
 import TempoMediaChart from './modules/dashboard/charts/TempoMediaChart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 /* import Orders from './Orders';
@@ -160,16 +160,16 @@ const Dashboard = () => {
     const routes = [
         {
             path: '/dashboard',
-            main: () => chartElement(<AssertividadeChart title={'Assertividade'} />, ''),
+            main: () => <AssertividadeChart title={'Assertividade'} />,
         },
-        {
+        /* {
             path: '/nivel-confusao',
             main: () => chartElement(<ConfusionLevelChart title={'Nível de Confusão'} />, ''),
         },
         {
             path: '/tempo-resposta',
             main: () => chartElement(<ResponseTimeChart title={'Tempo de resposta'} />, ''),
-        },
+        }, */
         {
             path: '/Desordem x Assertividade',
             main: () => chartElement(<DesordemAssertividadeChart title={'Desordem x Assertividade'} />, '*O ponto amarelo é você'),
