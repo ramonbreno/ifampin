@@ -55,15 +55,18 @@ const DuvidaAssertividadeChart: React.FC<any> = ({ title }) => {
             if (duvida >= 0 && duvida <= maiorDuvida / 2 &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo1.push(dadosItem);
-                setRecommendation('O aluno não teve um índice de assertividade boa, porém o aluno estava o nível de dúvidas, pode ser que o aluno não estava levando o simulado a sério, marcando sem ter atenção as questões');
+                //setRecommendation('O aluno não teve um índice de assertividade boa, porém o aluno estava o nível de dúvidas, pode ser que o aluno não estava levando o simulado a sério, marcando sem ter atenção as questões');
+                setRecommendation('Você precisa estudar mais, para obter êxito nas avaliações');
             } else if (duvida >= 0 && duvida <= maiorDuvida / 2 &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo2.push(dadosItem);
-                setRecommendation('O aluno apresentava poucas dúvidas em relação as questões e possuiu um nível aceitável de assertividade, parecendo que estava seguro durante o simulado.')
+                //setRecommendation('O aluno apresentava poucas dúvidas em relação as questões e possuiu um nível aceitável de assertividade, parecendo que estava seguro durante o simulado.')
+                setRecommendation('Continue assim, continue estudando, assim terá menos dúvidas ao responder as questões')
             } else if (duvida > maiorDuvida / 2 && duvida <= maiorDuvida &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo3.push(dadosItem);
-                setRecommendation('O aluno demonstrou insegurança ao responder as questões com alto nível de dúvida e uma baixa assertividade, o que se leva a crer que o aluno ainda se esforçou, porém não tinha a confiança ou o conhecimento necessário no simulado.')
+                //setRecommendation('O aluno demonstrou insegurança ao responder as questões com alto nível de dúvida e uma baixa assertividade, o que se leva a crer que o aluno ainda se esforçou, porém não tinha a confiança ou o conhecimento necessário no simulado.')
+                setRecommendation('É necessário mais estudo, quando for estudar evite distrações para um melhor aproveitamento');
             } else if (duvida > maiorDuvida / 2 && duvida <= maiorDuvida &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo4.push(dadosItem);
@@ -93,11 +96,11 @@ const DuvidaAssertividadeChart: React.FC<any> = ({ title }) => {
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
 
-                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
-                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
-                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
-                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
-                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
+                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />{/* verde */}
+                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />{/* lilás */}
+                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />{/* vermelho */}
+                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />{/* azul */}
+                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />{/* amarelo */}
             </ScatterChart>
             <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>

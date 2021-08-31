@@ -9,6 +9,7 @@ const CompreensaoAssertividadeChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -54,15 +55,19 @@ const CompreensaoAssertividadeChart: React.FC<any> = ({ title }) => {
             else if (compreensao >= 0 && compreensao <= maiorComp / 2 &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo1.push(dadosItem);
+                setRecommendation('Você precisa ler mais, melhorar a sua compreensão das questões para fazer uma prova melhor');
             } else if (compreensao >= 0 && compreensao <= maiorComp / 2 &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo2.push(dadosItem);
+                setRecommendation('Você precisa estudar mais, procure um local mais calmo para estudar, melhor a assimilação dos conteúdos');
             } else if (compreensao > maiorComp / 2 && compreensao <= maiorComp &&
                 assertividade >= 0 && assertividade <= maiorAssert / 2) {
                 grupo3.push(dadosItem);
+                setRecommendation('Você precisa ler mais, melhorar a sua compreensão das questões para fazer uma prova melhor');
             } else if (compreensao > maiorComp / 2 && compreensao <= maiorComp &&
                 assertividade > maiorAssert / 2 && assertividade <= maiorAssert) {
                 grupo4.push(dadosItem);
+                setRecommendation('Continue assim, está compreendendo bem os assuntos ministrados');
             }
         });
 
@@ -89,12 +94,13 @@ const CompreensaoAssertividadeChart: React.FC<any> = ({ title }) => {
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
 
-                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
-                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
-                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
-                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
-                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
+                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />{/* verde */}
+                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />{/* lilás */}
+                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />{/* vermelho */}
+                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />{/* azul */}
+                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />{/* amarelo */}
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

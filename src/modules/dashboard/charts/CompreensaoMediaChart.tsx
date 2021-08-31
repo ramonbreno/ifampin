@@ -9,6 +9,7 @@ const CompreensaoMediaChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -48,20 +49,23 @@ const CompreensaoMediaChart: React.FC<any> = ({ title }) => {
             };
 
             if (registrationLocal != null && parseInt(registrationLocal) === registration) {
-                console.log(registration);
                 grupo0.push(dadosItem);
             }
             else if (compreensao >= 0 && compreensao <= maiorX / 2 &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//verde
+                setRecommendation('Você precisa se concentrar em seu tempo de estudos, evite distrações como telefone celular, televisão, entre outros');
                 grupo1.push(dadosItem);
             } else if (compreensao >= 0 && compreensao <= maiorX / 2 &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//lilas
                 grupo2.push(dadosItem);
+                setRecommendation('');
             } else if (compreensao > maiorX / 2 && compreensao <= maiorX &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//vermelho
+                setRecommendation('Você teve uma compreensão boa das provas, porém precisa estudar um pouco mais para obter um resultado melhor');
                 grupo3.push(dadosItem);
             } else if (compreensao > maiorX / 2 && compreensao <= maiorX &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//azul
+                setRecommendation('Parabéns, continue assim, continue estudando e lendo o material para continuar seu desempenho');
                 grupo4.push(dadosItem);
             }
         });
@@ -95,6 +99,7 @@ const CompreensaoMediaChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

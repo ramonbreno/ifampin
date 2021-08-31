@@ -9,6 +9,7 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -52,16 +53,20 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
                 grupo0.push(dadosItem);
             }
             else if (duvida >= 0 && duvida <= maiorX / 2 &&
-                tempo >= 0 && tempo <= maiorY / 2) {
+                tempo >= 0 && tempo <= maiorY / 2) {//verde
+                setRecommendation('Você fez sua prova com poucas dúvidas e dentro do tempo recomendado.');
                 grupo1.push(dadosItem);
             } else if (duvida >= 0 && duvida <= maiorX / 2 &&
-                tempo > maiorY / 2 && tempo <= maiorY) {
+                tempo > maiorY / 2 && tempo <= maiorY) {//lilas
+                setRecommendation('Você estava com poucas dúvidas, porém precisa ler mais e melhorar a compreensão das questões em menos tempos, pois lembre que as provas de vestibular possuem tempos para a sua realização');
                 grupo2.push(dadosItem);
             } else if (duvida > maiorX / 2 && duvida <= maiorX &&
-                tempo >= 0 && tempo <= maiorY / 2) {
+                tempo >= 0 && tempo <= maiorY / 2) {//vermelho
+                setRecommendation('');
                 grupo3.push(dadosItem);
             } else if (duvida > maiorX / 2 && duvida <= maiorX &&
-                tempo > maiorY / 2 && tempo <= maiorY) {
+                tempo > maiorY / 2 && tempo <= maiorY) {//azul
+                setRecommendation('Você precisa estudar um pouco mais e prestar atenção ao tempo gasto para realização da prova');
                 grupo4.push(dadosItem);
             }
         });
@@ -95,6 +100,7 @@ const DuvidaTempoChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

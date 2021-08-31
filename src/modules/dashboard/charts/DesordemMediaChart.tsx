@@ -9,6 +9,7 @@ const DesordemMediaChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -49,16 +50,20 @@ const DesordemMediaChart: React.FC<any> = ({ title }) => {
                 console.log(registration);
                 grupo0.push(dadosItem);
             } else if (desordem >= 0 && desordem <= maiorX / 2 &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//verde
+                setRecommendation('Você precisa estudar mais e procurar refazer os exercícios');
                 grupo1.push(dadosItem);
             } else if (desordem >= 0 && desordem <= maiorX / 2 &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//lilas
+                setRecommendation('continue estudando, que poderá melhorar maus ainda seu desempenho');
                 grupo2.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//vermeho
+                setRecommendation('Você precisa organizar seu tempo, aumentar o tempo de estudos em casa, e procurar mais os professores para tirar possíveis dúvidas');
                 grupo3.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//azul
+                setRecommendation('Continue estudando, que poderá melhorar mais ainda seu desempenho');
                 grupo4.push(dadosItem);
             }
         });
@@ -92,6 +97,7 @@ const DesordemMediaChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

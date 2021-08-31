@@ -9,6 +9,7 @@ const DesordemTempoChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -53,15 +54,19 @@ const DesordemTempoChart: React.FC<any> = ({ title }) => {
             }
             else if (desordem >= 0 && desordem <= maiorX / 2 &&
                 tempo >= 0 && tempo <= maiorY / 2) {
+                setRecommendation('Possivelmente você estava mais seguro no assunto, continua estudando para melhorar');
                 grupo1.push(dadosItem);
             } else if (desordem >= 0 && desordem <= maiorX / 2 &&
                 tempo > maiorY / 2 && tempo <= maiorY) {
+                setRecommendation('Você estava seguindo as questões, provavelmente estava seguro na prova, porém é necessário prestar atenção no tempo em que realizou a prova');
                 grupo2.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
                 tempo >= 0 && tempo <= maiorY / 2) {
+                setRecommendation('Você provavelmente respondeu as perguntas que achou mais fácil, continue estudando e mantenha o tempo que utilizou para fazer a prova');
                 grupo3.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
                 tempo > maiorY / 2 && tempo <= maiorY) {
+                setRecommendation('Você precisa estudar mais o conteúdo, refazer as atividades propostas pelo professor, para melhorar a sua resolução das questões da prova');
                 grupo4.push(dadosItem);
             }
         });
@@ -89,12 +94,13 @@ const DesordemTempoChart: React.FC<any> = ({ title }) => {
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
 
-                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
-                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
-                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
-                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
-                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
+                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />{/* verde */}
+                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />{/* lilás */}
+                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />{/* vermelho */}
+                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />{/* azul */}
+                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />{/* amarelo */}
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

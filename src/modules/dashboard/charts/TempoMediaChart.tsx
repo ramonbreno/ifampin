@@ -9,6 +9,7 @@ const TempoMediaChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -52,19 +53,23 @@ const TempoMediaChart: React.FC<any> = ({ title }) => {
                 grupo0.push(dadosItem);
             }
             else if (tempo >= 0 && tempo <= maiorX / 2 &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//verde
                 grupo1.push(dadosItem);
+                setRecommendation('É necessário revisar o material das disciplinas e fazer sem pressa a prova, leia atentamente os enunciados');
             }
             else if (tempo >= 0 && tempo <= maiorX / 2 &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//lilas
+                setRecommendation('Parabéns! Continue assim! Sempre reveja os assuntos e exercícios!');
                 grupo2.push(dadosItem);
             }
             else if (tempo > maiorX / 2 && tempo <= maiorX &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//vermelho
+                setRecommendation('É necessário rever todo o material e exercícios passados pelos professores, se concentrar no material em um ambiente tranquilo sem interferência, e procurar os professores das disciplinas que sentir mais dificuldades');
                 grupo3.push(dadosItem);
             }
             else if (tempo > maiorX / 2 && tempo <= maiorX &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//azul
+                setRecommendation('Parabéns, você fez uma boa prova, somente tente melhorar o tempo gasto para realização da prova, lembrando que o tempo é importante!');
                 grupo4.push(dadosItem);
             }
         });
@@ -98,6 +103,7 @@ const TempoMediaChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

@@ -9,6 +9,7 @@ const DesordemDuvidaChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -52,16 +53,20 @@ const DesordemDuvidaChart: React.FC<any> = ({ title }) => {
                 grupo0.push(dadosItem);
             }
             else if (desordem >= 0 && desordem <= maiorX / 2 &&
-                duvida >= 0 && duvida <= maiorY / 2) {
+                duvida >= 0 && duvida <= maiorY / 2) {//verde
+                setRecommendation('Parece que você teve poucas dúvidas e seguiu a ordem das questões, continue estudando para melhorar seu desempenho nas avaliações');
                 grupo1.push(dadosItem);
             } else if (desordem >= 0 && desordem <= maiorX / 2 &&
-                duvida > maiorY / 2 && duvida <= maiorY) {
+                duvida > maiorY / 2 && duvida <= maiorY) {//lilas
+                setRecommendation('Você apresentou alguma dúvida em relação as questões, procure melhorar a interpretação refazendo os exercícios que o professor passou');
                 grupo2.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
-                duvida >= 0 && duvida <= maiorY / 2) {
+                duvida >= 0 && duvida <= maiorY / 2) {//vermelho
+                setRecommendation('Segundo os dados, você teve poucas dúvidas, porém respondeu as questões que provavelmente teve mais conhecimento, procure estudar e refazer as atividades propostas pelo professor');
                 grupo3.push(dadosItem);
             } else if (desordem > maiorX / 2 && desordem <= maiorX &&
-                duvida > maiorY / 2 && duvida <= maiorY) {
+                duvida > maiorY / 2 && duvida <= maiorY) {//azul
+                setRecommendation('Você precisa reler os assuntos, estudar mais para que seu desempenho melhore');
                 grupo4.push(dadosItem);
             }
         });
@@ -89,12 +94,13 @@ const DesordemDuvidaChart: React.FC<any> = ({ title }) => {
                 <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 <Legend />
 
-                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
-                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
-                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
-                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
-                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
+                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />{/* verde */}
+                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />{/* lilás */}
+                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />{/* vermelho */}
+                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />{/* azul */}
+                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />{/* amarelo */}
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }

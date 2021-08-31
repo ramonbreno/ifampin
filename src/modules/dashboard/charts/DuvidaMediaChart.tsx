@@ -9,6 +9,7 @@ const DuvidaMediaChart: React.FC<any> = ({ title }) => {
     const [grupo2/* , setGrupo2 */] = useState<Array<Object>>([]);
     const [grupo3/* , setGrupo3 */] = useState<Array<Object>>([]);
     const [grupo4/* , setGrupo4 */] = useState<Array<Object>>([]);
+    const [recommendation, setRecommendation] = useState<String>('');
 
     useEffect(() => {
 
@@ -52,16 +53,20 @@ const DuvidaMediaChart: React.FC<any> = ({ title }) => {
                 grupo0.push(dadosItem);
             }
             else if (duvida >= 0 && duvida <= maiorX / 2 &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//verde
                 grupo1.push(dadosItem);
+                setRecommendation('Procure melhor o seu tempo de estudo, tire as distrações no horário do seu estudo, assim terá um melhor aproveitamento na realização da sua prova');
             } else if (duvida >= 0 && duvida <= maiorX / 2 &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//lilas
                 grupo2.push(dadosItem);
+                setRecommendation('Parabéns, continue estudando assim, você obterá sucesso suas provas');
             } else if (duvida > maiorX / 2 && duvida <= maiorX &&
-                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {
+                mediaSimu >= 0 && mediaSimu <= maiorY / 2) {//vermelho
+                setRecommendation('Você precisa estudar mais, quanto mais se estuda, menor é a sua dúvida na resolução da prova, procure refazer as atividades propostas pelos professores');
                 grupo3.push(dadosItem);
             } else if (duvida > maiorX / 2 && duvida <= maiorX &&
-                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {
+                mediaSimu > maiorY / 2 && mediaSimu <= maiorY) {//azul
+                setRecommendation('');
                 grupo4.push(dadosItem);
             }
         });
@@ -95,6 +100,7 @@ const DuvidaMediaChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
             </ScatterChart>
+            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
     );
 }
