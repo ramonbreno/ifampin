@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CartesianGrid, Legend, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import DadosGeraisData from '../../../contracts/modules/charts/dados_gerais.json';
+import Scaffold from '../../../Scaffold';
 import Title from '../../../Title';
 
 const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
@@ -82,30 +83,34 @@ const DesordemAssertividadeChart: React.FC<any> = ({ title }) => {
         setGrupo4(grupo4); */
     }, [grupo0, grupo1, grupo2, grupo3, grupo4]);
 
+    const content = (<React.Fragment>
+        <Title title={title} />
+        <ScatterChart width={730} height={250}
+            /* margin={{ top: 20, right: 20, bottom: 10, left: 10 }} */
+            style={{
+                margin: '10px auto'
+            }}
+        >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis type="number" dataKey="x" name="desordem" unit="d" />
+            <YAxis type="number" dataKey="y" name="assertividade" unit="a" />
+
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+            <Legend />
+
+            <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
+            <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
+            <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
+            <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
+            <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
+        </ScatterChart>
+
+    </React.Fragment>);
+
     return (
-        <React.Fragment>
-            <Title title={title} />
-            <ScatterChart width={730} height={250}
-                /* margin={{ top: 20, right: 20, bottom: 10, left: 10 }} */
-                style={{
-                    margin: '10px auto'
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" dataKey="x" name="desordem" unit="d" />
-                <YAxis type="number" dataKey="y" name="assertividade" unit="a" />
-
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Legend />
-
-                <Scatter className="2018139340207" data={grupo1} fill="#82ca9d" />
-                <Scatter className="2018139340118" data={grupo2} fill="#8884d8" />
-                <Scatter className="2018139340118" data={grupo3} fill="#ff0000" />
-                <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
-                <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
-            </ScatterChart>
-            <span style={{ color: '#d6913c' }}>{recommendation}</span>
-        </React.Fragment>
+        <Scaffold recommendations={recommendation}>
+            {content}
+        </Scaffold>
     );
 }
 

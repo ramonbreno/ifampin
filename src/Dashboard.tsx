@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
 /* import Box from '@material-ui/core/Box'; */
-import Container from '@material-ui/core/Container';
+//import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid';
+//import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 /* import Link from '@material-ui/core/Link'; */
 import List from '@material-ui/core/List';
-import Paper from '@material-ui/core/Paper';
+//import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -142,13 +142,13 @@ const Dashboard = () => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const logout = () => {
         window.localStorage.setItem('registration', '');
         history.push('/login');
     }
-    const chartElement = (children: React.ReactNode, subtitle: string) =>
+    /* const chartElement = (children: React.ReactNode, subtitle: string) =>
         <Container maxWidth="lg" className={classes.container}>
             <Grid item xs={12} md={12} lg={12}>
                 <Paper className={fixedHeightPaper}>
@@ -156,7 +156,7 @@ const Dashboard = () => {
                     <span style={{ color: '#d6913c' }}>{subtitle}</span>
                 </Paper>
             </Grid>
-        </Container>;
+        </Container>; */
     const routes = [
         {
             path: '/dashboard',
@@ -172,43 +172,43 @@ const Dashboard = () => {
         }, */
         {
             path: '/Desordem x Assertividade',
-            main: () => chartElement(<DesordemAssertividadeChart title={'Desordem x Assertividade'} />, '*O ponto amarelo é você'),
+            main: () => <DesordemAssertividadeChart title={'Desordem x Assertividade'} />,
         },
         {
             path: '/duvida-assertividade',
-            main: () => chartElement(<DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />, '*O ponto amarelo é você'),
+            main: () => <DuvidaAssertividadeChart title={'Dúvida x Assertividade'} />,
         },
         {
             path: '/compreensao-assertividade',
-            main: () => chartElement(<CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />, '*O ponto amarelo é você'),
+            main: () => <CompreensaoAssertividadeChart title={'Compreensão x Assertividade'} />,
         },
         {
             path: '/desordem-tempo',
-            main: () => chartElement(<DesordemTempoChart title={'Desordem x Tempo'} />, '*O ponto amarelo é você'),
+            main: () => <DesordemTempoChart title={'Desordem x Tempo'} />,
         },
         {
             path: '/desordem-duvida',
-            main: () => chartElement(<DesordemDuvidaChart title={'Desordem x Dúvida'} />, '*O ponto amarelo é você'),
+            main: () => <DesordemDuvidaChart title={'Desordem x Dúvida'} />,
         },
         {
             path: '/duvida-tempo',
-            main: () => chartElement(<DuvidaTempoChart title={'Dúvida x Tempo'} />, '*O ponto amarelo é você'),
+            main: () => <DuvidaTempoChart title={'Dúvida x Tempo'} />,
         },
         {
             path: '/compreensao-media',
-            main: () => chartElement(<CompreensaoMediaChart title={'Compreensão x Média Simulado'} />, '*O ponto amarelo é você'),
+            main: () => <CompreensaoMediaChart title={'Compreensão x Média Simulado'} />,
         },
         {
             path: '/duvida-media',
-            main: () => chartElement(<DuvidaMediaChart title={'Dúvida x Média Simulado'} />, '*O ponto amarelo é você'),
+            main: () => <DuvidaMediaChart title={'Dúvida x Média Simulado'} />,
         },
         {
             path: '/desordem-media',
-            main: () => chartElement(<DesordemMediaChart title={'Desordem x Média Simulado'} />, '*O ponto amarelo é você'),
+            main: () => <DesordemMediaChart title={'Desordem x Média Simulado'} />,
         },
         {
             path: '/tempo-media',
-            main: () => chartElement(<TempoMediaChart title={'Tempo x Média Simulado'} />, '*O ponto amarelo é você'),
+            main: () => <TempoMediaChart title={'Tempo x Média Simulado'} />,
         },
     ];
 

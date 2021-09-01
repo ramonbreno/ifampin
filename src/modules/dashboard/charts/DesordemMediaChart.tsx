@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CartesianGrid, Legend, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from 'recharts';
 import DadosGeraisData from '../../../contracts/modules/charts/dados_gerais.json';
+import Scaffold from '../../../Scaffold';
 import Title from '../../../Title';
 
 const DesordemMediaChart: React.FC<any> = ({ title }) => {
@@ -75,7 +76,7 @@ const DesordemMediaChart: React.FC<any> = ({ title }) => {
         setGrupo4(grupo4); */
     }, [grupo0, grupo1, grupo2, grupo3, grupo4]);
 
-    return (
+    const content = (
         <React.Fragment>
             <Title title={title} />
             <ScatterChart width={730} height={250}
@@ -97,8 +98,13 @@ const DesordemMediaChart: React.FC<any> = ({ title }) => {
                 <Scatter className="2018139340118" data={grupo4} fill="#0000ff" />
                 <Scatter className="2018139340119" data={grupo0} fill="#ffff21" />
             </ScatterChart>
-            <span style={{ color: '#d6913c' }}>{recommendation}</span>
         </React.Fragment>
+    );
+
+    return (
+        <Scaffold recommendations={recommendation}>
+            {content}
+        </Scaffold>
     );
 }
 
