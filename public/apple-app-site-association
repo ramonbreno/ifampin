@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "LKUKJ6SQYQ.com.Bemol.Bemol",
+                "paths": [
+                    "*"
+                ]
+            },
+            {
+                "appID": "LKUKJ6SQYQ.com.Bemol.hml",
+                "paths": [
+                    "*"
+                ]
+            }
+        ]
+    }
+}
